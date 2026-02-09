@@ -3,15 +3,14 @@ import { TouchableOpacity, Alert, Text, TextInput, View, StyleSheet } from "reac
 
 export default function Formulario( { onAdicionar }) {
 
-    const [formData, setFormData] = useState({
+    const formInicial = {
             evento: '',
             data: '',
             organizador: '',
             descricao: ''
-        })
+        }
 
-
-    const [erro, setErro] = useState(false)
+    const [formData, setFormData] = useState(formInicial)
 
     const handleCadastrar = () => {
             const campoVazio = Object.values(formData).some( (value) =>
@@ -23,7 +22,9 @@ export default function Formulario( { onAdicionar }) {
                 Alert.alert('Vazio', "Preencha todos os campos!")
             } else {
                 Alert.alert('Concluido', "Evento cadastro com sucesso!")
-                // onAdicionar(formData)
+                onAdicionar(formData)
+                
+                setFormData(formInicial)
         }
         return
         }

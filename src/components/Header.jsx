@@ -5,7 +5,7 @@ export default function Header() {
     <View style={styles.container}>
         <Ionicons name="game-controller-outline" size={70} color="aqua" padding='20'/>
 
-        <Text style={styles.h1}> GAME EVENT TRACKER</Text>
+        <Text style={styles.h1}>GAME EVENT TRACKER</Text>
     </View>
     )
 }
