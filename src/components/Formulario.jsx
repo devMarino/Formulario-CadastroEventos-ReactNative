@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { TouchableOpacity, Alert, Text, TextInput, View, StyleSheet } from "react-native"
-
+import MaskInput from "react-native-mask-input"
 export default function Formulario( { onAdicionar }) {
 
     const formInicial = {
@@ -37,38 +37,46 @@ export default function Formulario( { onAdicionar }) {
     
     return(
         <View style={styles.container}>
-            <TextInput
-            label="Nome do Evento"
-            placeholder="Ex: Torneio Valorant"
-            value={formData.evento}
-            onChangeText={(text) => inputChange('evento', text)}
-            style={styles.input}
+            <View style={styles.formContainer}>
+                <Text style={styles.title}>Nome do evento:</Text>
+                <TextInput
+                placeholder="Ex: Torneio Valorant"
+                value={formData.evento}
+                onChangeText={(text) => inputChange('evento', text)}
+                style={styles.input}
+                autoCapitalize="words"
+                />
+            </View>
+            <View style={styles.formContainerCenter}>
+                <Text style={styles.title}>Data do evento:</Text>
+                <MaskInput
+                placeholder="00/00/0000"
+                value={formData.data}
+                onChangeText={(masked) => inputChange('data', masked)}
+                mask={[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
+                style={styles.input}
+                keyboardType="numeric"
             />
+            </View>
 
-            <TextInput
-            label="Data"
-            placeholder="00/00/0000"
-            value={formData.data}
-            onChangeText={(text) => inputChange('data', text)}
-            style={styles.input}
+            <View style={styles.formContainerCenter}>
+                <Text style={styles.title}>Organizador:</Text>
+                <TextInput
+                placeholder="ex: Clã Alpha"
+                value={formData.organizador}
+                onChangeText={(text) => inputChange('organizador', text)}
+                style={styles.input}
+                />
+            </View>
+            <View style={styles.formContainerDesc}>
+                <Text style={styles.title}>Descrição</Text>
+                <TextInput 
+                placeholder="ex: Competição 5v5 no mapa Bind."
+                value={formData.descricao}
+                onChangeText={(text) => inputChange('descricao', text)}
+                style={styles.input}
             />
-
-
-            <TextInput
-            label="Organizador"
-            placeholder="ex: Clã Alpha"
-            value={formData.organizador}
-            onChangeText={(text) => inputChange('organizador', text)}
-            style={styles.input}
-            />
-
-            <TextInput 
-            label="Organizador"
-            placeholder="ex: Competição 5v5 no mapa Bind."
-            value={formData.descricao}
-            onChangeText={(text) => inputChange('descricao', text)}
-            style={styles.input}
-            />
+            </View>
 
             <TouchableOpacity style={styles.botao} onPress={handleCadastrar}>
         <Text style={styles.textoBotao}>Salvar Evento</Text>
@@ -84,10 +92,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#111629f8'
+        backgroundColor: '#fffffff8',
+        width: '100%'
     },
-    input: {
-        backgroundColor: '#fff',
-        padding: 5
-    }
+  
+
 })
